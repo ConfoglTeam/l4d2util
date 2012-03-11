@@ -8,7 +8,7 @@
  *
  * @return bool
  */
-bool:InSecondHalfOfRound() {
+stock bool:InSecondHalfOfRound() {
     return bool:GameRules_GetProp("m_bInSecondHalfOfRound");
 }
 
