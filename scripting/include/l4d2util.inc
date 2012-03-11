@@ -11,6 +11,10 @@
 #include <l4d2util_survivors>
 #include <l4d2util_tanks>
 
+#if defined __IN_L4D2UTIL__
+    #endinput
+#endif
+
 /**
  * Called when a new round begins.
  *
