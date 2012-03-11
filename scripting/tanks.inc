@@ -78,18 +78,18 @@ public Action:L4D2Util_Tanks_TankDeathDelay(Handle:hTimer, any:iOldTankClient) {
     
     iTankClient = FindTankClient();
     
-    if (iTankClient == -1) {
-        bTankInPlay = false;
-        Call_StartForward(hFwdOnTankDeath);
-        Call_PushCell(iOldTankClient);
-        Call_Finish();
-    }
-    else if (iTankClient != iOldTankClient) {
+    if (iTankClient != -1 && iTankClient != iOldTankClient) {
         Call_StartForward(hFwdOnTankPass);
         Call_PushCell(iTankClient);
         Call_PushCell(iOldTankClient);
         Call_Finish();
+        return;
     }
+    
+    bTankInPlay = false;
+    Call_StartForward(hFwdOnTankDeath);
+    Call_PushCell(iOldTankClient);
+    Call_Finish();
 }
 
 L4D2Util_Tanks_CreateForwards() {
@@ -109,7 +109,7 @@ public _native_L4D2Util_IsTankInPlay(Handle:hPlugin, iNumParams) {
 }
 
 FindTankClient() {
-    for (new i = 0; i < MaxClients+1; i++) {
+    for (new i = 1; i < MaxClients+1; i++) {
         if (IsTank(i)) {
             return i;
         }

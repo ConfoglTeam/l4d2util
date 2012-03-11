@@ -5,12 +5,6 @@
 #endif
 #define l4d2util_inc_
 
-#include <l4d2util_constants>
-#include <l4d2util_infected>
-#include <l4d2util_rounds>
-#include <l4d2util_survivors>
-#include <l4d2util_tanks>
-
 /**
  * Called when a new round begins.
  *
@@ -54,10 +48,10 @@ forward OnTankPass(iTank, iOldTank);
 /**
  * Called when the tank dies.
  *
- * @param Tank Client ID of the dead tank
+ * @param iOldTank Client ID of the dead tank
  * @noreturn
  */
-forward OnTankDeath();
+forward OnTankDeath(iOldTank);
 
 /**
  * Is there a tank currently in play?
@@ -72,6 +66,13 @@ native bool:IsTankInPlay();
  * @return client ID
  */
 native GetTankClient();
+
+
+#include <l4d2util_constants>
+#include <l4d2util_infected>
+#include <l4d2util_rounds>
+#include <l4d2util_survivors>
+#include <l4d2util_tanks>
 
 public SharedPlugin:__pl_l4d2util = {
     name = "l4d2util",

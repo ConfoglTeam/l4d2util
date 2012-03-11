@@ -20,8 +20,8 @@ public OnPluginStart() {
     HookEvent("player_death", L4D2Util_PlayerDeath);
 }
 
-public OnMapStart() {
-    L4D2Util_Rounds_OnMapStart();
+public OnMapEnd() {
+    L4D2Util_Rounds_OnMapEnd();
 }
 
 public APLRes:AskPluginLoad2(Handle:hPlugin, bool:bLateLoad, String:sError[], iErrMax) {
@@ -55,3 +55,4 @@ public Action:L4D2Util_PlayerDeath(Handle:event, const String:name[], bool:dontB
     
     L4D2Util_Tanks_PlayerDeath(iPlayer);
 }
+

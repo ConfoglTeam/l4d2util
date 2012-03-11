@@ -85,7 +85,7 @@ stock bool:IsTankOnFire() {
     new iTankClient = GetTankClient();
     
     if (iTankClient == -1) {
-        return -1;
+        return false;
     }
     
     return bool:(GetEntityFlags(iTankClient) & FL_ONFIRE);

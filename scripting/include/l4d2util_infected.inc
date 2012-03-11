@@ -45,7 +45,7 @@ stock bool:IsInfectedGhost(client) {
  * @param iBufLen size of sBuffer
  * @noreturn
  */
-stock GetInfectedClassName(L4D2_Infected:iClass, String:sBuffer, iBufLen) {
+stock GetInfectedClassName(L4D2_Infected:iClass, String:sBuffer[], iBufLen) {
     strcopy(sBuffer, iBufLen, L4D2_InfectedNames[iClass-1]); 
 }
 

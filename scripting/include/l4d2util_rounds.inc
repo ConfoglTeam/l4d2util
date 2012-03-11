@@ -3,6 +3,8 @@
 #endif
 #define l4d2util_rounds_inc_
 
+#include <sdktools>
+
 /**
  * Is the second round of this map currently being played?
  *

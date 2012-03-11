@@ -44,8 +44,8 @@ stock GetSurvivorPermanentHealth(client) {
  */
 stock GetSurvivorTemporaryHealth(client) {
     new Float:fDecayRate = GetConVarFloat(FindConVar("pain_pills_decay_rate"));
-    new Float:fHealthBuffer = GetEntPropFloat(client, Prop_send, "m_healthBuffer");
-    new Float:fHealthBufferTime = GetEntPropFloat(client, Prop_Send, "m_healthBufferTime"));
+    new Float:fHealthBuffer = GetEntPropFloat(client, Prop_Send, "m_healthBuffer");
+    new Float:fHealthBufferTime = GetEntPropFloat(client, Prop_Send, "m_healthBufferTime");
     new iTempHp = RoundToCeil(fHealthBuffer - ((GetGameTime() - fHealthBufferTime) * fDecayRate)) - 1;
     return iTempHp > 0 ? iTempHp : 0;
 }

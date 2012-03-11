@@ -5,7 +5,7 @@ new bool:bInRound = false;
 new Handle:hFwdOnRoundStart;
 new Handle:hFwdOnRoundEnd;
 
-L4D2Util_Rounds_OnMapStart() {
+L4D2Util_Rounds_OnMapEnd() {
     bInRound = false;
 }
 
