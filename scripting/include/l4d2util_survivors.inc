@@ -33,7 +33,7 @@ stock bool:IsIncapacitated(client) {
  * @return bool
  */
 stock GetSurvivorPermanentHealth(client) {
-    return GetEntProp(client, Prop_Send, m_iHealth);
+    return GetEntProp(client, Prop_Send, "m_iHealth");
 }
 
 /**
@@ -48,17 +48,5 @@ stock GetSurvivorTemporaryHealth(client) {
     new Float:fHealthBufferTime = GetEntPropFloat(client, Prop_Send, "m_healthBufferTime"));
     new iTempHp = RoundToCeil(fHealthBuffer - ((GetGameTime() - fHealthBufferTime) * fDecayRate)) - 1;
     return iTempHp > 0 ? iTempHp : 0;
-}
-
-/**
- * Returns the amount of permanent health a survivor has. 
- *
- * @param iTeam team ID
- * @param sBuffer buffer to store the team name in
- * @param iBufLen size of sBuffer
- * @noreturn
- */
-stock GetTeamName(L4D2_Team:iTeam, String:sBuffer[], iBufLen) {
-    strcopy(sBuffer, iBufLen, L4D2_TeamNames[iTeam-1]);
 }
 

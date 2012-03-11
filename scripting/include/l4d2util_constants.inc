@@ -5,7 +5,7 @@
 
 enum L4D2_Team {
     L4D2Team_Spectator = 1,
-    L4D2Team_Survivors,
+    L4D2Team_Survivor,
     L4D2Team_Infected
 };
 
@@ -18,12 +18,6 @@ enum L4D2_Infected {
     L4D2Infected_Charger,
     L4D2Infected_Witch,
     L4D2Infected_Tank
-};
-
-new const String:L4D2_TeamNames[3][] = {
-    "Spectator",
-    "Survivors",
-    "Infected"
 };
 
 new const String:L4D2_InfectedNames[8][] = {
