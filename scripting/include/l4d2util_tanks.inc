@@ -10,12 +10,9 @@
  * @return bool
  */
 stock bool:IsTank(client) {
-    if (IsClientInGame(client)
-        && GetClientTeam(client) == L4D2Team_Infected
-        && GetInfectedClass(client) == L4D2Infected_Tank) {
-        return true;
-    }
-    return false;
+    return IsClientInGame(client)
+        && L4D2_Team:GetClientTeam(client) == L4D2Team_Infected
+        && GetInfectedClass(client) == L4D2Infected_Tank;
 }
 
 /**

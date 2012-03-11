@@ -1,5 +1,8 @@
 #pragma semicolon 1
 
+#define __IN_L4D2UTIL__
+
+#include <l4d2util>
 #include "rounds.inc"
 #include "tanks.inc"
 

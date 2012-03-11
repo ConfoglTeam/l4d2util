@@ -5,6 +5,8 @@
 #endif
 #define l4d2util_inc_
 
+#if !defined __IN_L4D2UTIL__
+
 /**
  * Called when a new round begins.
  *
@@ -67,6 +69,7 @@ native bool:IsTankInPlay();
  */
 native GetTankClient();
 
+#endif // __IN_L4D2UTIL__
 
 #include <l4d2util_constants>
 #include <l4d2util_infected>
