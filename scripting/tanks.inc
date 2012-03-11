@@ -1,10 +1,6 @@
 #include <sourcemod>
 #include <sdktools>
 
-#include "l4d2util_constants.inc"
-#include "l4d2util_infected.inc"
-#include "l4d2util_tanks.inc"
-
 new iTankClient = -1;
 
 new bool:bTankInPlay = false;
