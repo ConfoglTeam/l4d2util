@@ -20,24 +20,13 @@ enum L4D2_Infected {
     L4D2Infected_Tank
 };
 
-enum L4D2_Survivors {
-    L4D2Survivor_Coach,
-    L4D2Survivor_Ellis,
-    L4D2Survivor_Nick,
-    L4D2Survivor_Rochelle,
-    L4D1Survivor_Francis,
-    L4D1Survivor_Louis,
-    L4D1Survivor_Bill,
-    L4D1Survivor_Zoey,
-};
-
-new const:String[L4D2_Team][] = {
+new const String:L4D2_TeamNames[3][] = {
     "Spectator",
     "Survivors",
     "Infected"
 };
 
-new const:String[L4D2_Infected][] = {
+new const String:L4D2_InfectedNames[8][] = {
     "Smoker",
     "Boomer",
     "Hunter",
@@ -48,13 +37,3 @@ new const:String[L4D2_Infected][] = {
     "Tank"
 };
 
-new const:String[L4D2_Survivors][] = {
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-};
