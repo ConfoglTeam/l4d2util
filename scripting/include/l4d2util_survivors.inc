@@ -50,3 +50,23 @@ stock GetSurvivorTemporaryHealth(client) {
     return iTempHp > 0 ? iTempHp : 0;
 }
 
+/**
+ * The number of times a survivor has been incapacitated.
+ *
+ * @param client client ID
+ * @return incap count
+ */
+stock GetSurvivorIncapCount(client) {
+	return GetEntProp(client, Prop_Send, "m_currentReviveCount");
+}
+
+/**
+ * Returns true if the survivor is hanging onto a ledge (or falling from one to their doom).
+ *
+ * @param client client ID
+ * @return bool
+ */
+stock bool:IsHangingFromLedge(client) {
+    return bool:(GetEntProp(client, Prop_Send, "m_isHangingFromLedge") || GetEntProp(client, Prop_Send, "m_isFallingFromLedge"));
+}
+

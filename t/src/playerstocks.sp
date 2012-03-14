@@ -26,6 +26,8 @@ public OnStartTests() {
     SMOK(!IsIncapacitated(iSurvivor), "the survivor is fully able");
     SMOK(GetSurvivorPermanentHealth(iSurvivor) >= 100, "the survivor has >100 hp");
     
+    SMIS(GetSurvivorIncapCount(iSurvivor), 0, "the survivor has not been incapacitated");
+    
     IncapPlayer(iSurvivor);
     SMOK(IsIncapacitated(iSurvivor), "the survivor is incapacitated");
     
