@@ -10,7 +10,7 @@
  * @return bool
  */
 stock bool:IsInfected(client) {
-    if (!IsClientInGame(client) || GetClientTeam(client) != L4D2Team_Infected) {
+    if (!IsClientInGame(client) || L4D2_Team:GetClientTeam(client) != L4D2Team_Infected) {
         return false;
     }
     return true;
@@ -46,6 +46,6 @@ stock bool:IsInfectedGhost(client) {
  * @noreturn
  */
 stock GetInfectedClassName(L4D2_Infected:iClass, String:sBuffer[], iBufLen) {
-    strcopy(sBuffer, iBufLen, L4D2_InfectedNames[iClass-1]); 
+    strcopy(sBuffer, iBufLen, L4D2_InfectedNames[_:iClass-1]); 
 }
 

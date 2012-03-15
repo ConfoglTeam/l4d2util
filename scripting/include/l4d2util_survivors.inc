@@ -10,7 +10,7 @@
  * @return bool
  */
 stock bool:IsSurvivor(client) {
-    if (!IsClientInGame(client) || GetClientTeam(client) != L4D2Team_Survivor) {
+    if (!IsClientInGame(client) || L4D2_Team:GetClientTeam(client) != L4D2Team_Survivor) {
         return false;
     }
     return true;
