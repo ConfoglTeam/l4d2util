@@ -1,8 +1,8 @@
 #pragma semicolon 1
 
-#undef REQUIRE_PLUGIN
+#define L4D2UTIL_STOCKS_ONLY
+
 #include <l4d2util>
-#define REQUIRE_PLUGIN
 #include <sourcemod>
 #include <sdktools>
 #include <smtest>

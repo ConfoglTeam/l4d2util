@@ -3,6 +3,47 @@
 #endif
 #define l4d2_tanks_inc_
 
+#if !defined L4D2UTIL_STOCKS_ONLY
+  #if !defined __IN_L4D2UTIL__
+
+/**
+ * Called when a tank punches a hittable, like a car or dumpster.
+ *
+ * @param iTank Client ID of the tank
+ * @param iEntity Entity ID of the hittable
+ * @noreturn
+ */
+forward OnTankPunchHittable(iTank, iEntity);
+
+/**
+ * Called when a tank first spawns.
+ *
+ * @param iTank Client ID of the tank
+ * @noreturn
+ */
+forward OnTankSpawn(iTank);
+
+/**
+ * Called when a tank passes control from one player to another.
+ *
+ * @param iTank Client ID of the tank
+ * @param iOldTank Client ID of the previous tank
+ * @noreturn
+ */
+forward OnTankPass(iTank, iOldTank);
+
+/**
+ * Called when the tank dies.
+ *
+ * @param iOldTank Client ID of the dead tank
+ * @noreturn
+ */
+forward OnTankDeath(iOldTank);
+
+  #endif // __IN_L4D2UTIL__
+#endif // L4D2UTIL_STOCKS_ONLY
+
+
 /**
  * Is the player the tank? 
  *
