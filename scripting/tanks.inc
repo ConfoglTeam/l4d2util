@@ -1,18 +1,40 @@
 #include <sourcemod>
 #include <sdktools>
 
-new iTankClient = -1;
+static Handle:hFwdOnTankPunchHittable;
+static Handle:hFwdOnTankSpawn;
+static Handle:hFwdOnTankPass;
+static Handle:hFwdOnTankDeath;
 
-new bool:bTankInPlay = false;
+static Handle:hTankClients;
 
-new Handle:hFwdOnTankPunchHittable;
-new Handle:hFwdOnTankSpawn;
-new Handle:hFwdOnTankPass;
-new Handle:hFwdOnTankDeath;
+static AddTankToArray(client) {
+    PushArrayCell(hTankClients, client);
+}
+
+static RemoveTankFromArray(client) {
+    for (new i = 0; i < GetArraySize(hTankClients); ++i) {
+        if (GetArrayCell(hTankClients, i) == client) {
+            RemoveFromArray(hTankClients, i);
+        }
+    }
+}
+
+static bool:FindTankInArray(client) {
+    for (new i = 0; i < GetArraySize(hTankClients); ++i) {
+        if (GetArrayCell(hTankClients, i) == client) {
+            return true;
+        }       
+    }
+    
+    return false;
+}
+
+L4D2Util_Tanks_Init() {
+    hTankClients = CreateArray();
+}
 
 L4D2Util_Tanks_OnRoundStart() {
-    iTankClient = -1;
-    bTankInPlay = false;
     CreateTimer(0.1, L4D2Util_Tanks_HookCars);
 }
 
@@ -32,49 +54,49 @@ public Action:L4D2Util_Tanks_HookCars(Handle:hTimer) {
      }
 }
 
-public TankHittablePunched( const String:output[], caller, activator, Float:delay ) {
+public TankHittablePunched(const String:output[], caller, activator, Float:delay) {
     Call_StartForward(hFwdOnTankPunchHittable);
-    Call_PushCell(GetTankClient());
+    Call_PushCell(activator);
     Call_PushCell(caller);
     Call_Finish();
 }
 
+// The tank_spawn hook is called when the tanks spawns(!), but also when the
+// tank passes from AI to a player or from a player to AI.
 L4D2Util_Tanks_TankSpawn(client) {
-    new iOldTankClient = iTankClient;
-    iTankClient = client;
+    new iNumTanks = NumTanksInPlay();
     
-    if (!bTankInPlay) {
-        bTankInPlay = true;
+    if (GetArraySize(hTankClients) < iNumTanks) {
+        AddTankToArray(client);
         Call_StartForward(hFwdOnTankSpawn);
         Call_PushCell(client);
-        Call_Finish();
-    }
-    else {
-        Call_StartForward(hFwdOnTankPass);
-        Call_PushCell(client);
-        Call_PushCell(iOldTankClient);
         Call_Finish();
     }
 }
 
 L4D2Util_Tanks_PlayerDeath(client) {
-    if (!bTankInPlay) {
+    if (!IsTank(client)) {
         return;
     }
     
-    if (client == iTankClient) {
-        CreateTimer(0.5, L4D2Util_Tanks_TankDeathDelay, iTankClient);
-    }
+    CreateTimer(0.1, L4D2Util_Tanks_TankDeathDelay, client);
 }
 
 public Action:L4D2Util_Tanks_TankDeathDelay(Handle:hTimer, any:iOldTankClient) {
-    if (iOldTankClient != iTankClient) {
-        return;
+    new iTankClient = -1;
+    new client = -1;
+    
+    while ((client = FindTankClient(client)) != -1) {
+        if (!FindTankInArray(client)) {
+            iTankClient = client;
+            break;
+        }
     }
     
-    iTankClient = FindTankClient();
+    RemoveTankFromArray(iOldTankClient);
     
-    if (iTankClient != -1 && iTankClient != iOldTankClient) {
+    if (iTankClient != -1) {
+        AddTankToArray(client);
         Call_StartForward(hFwdOnTankPass);
         Call_PushCell(iTankClient);
         Call_PushCell(iOldTankClient);
@@ -82,7 +104,6 @@ public Action:L4D2Util_Tanks_TankDeathDelay(Handle:hTimer, any:iOldTankClient) {
         return;
     }
     
-    bTankInPlay = false;
     Call_StartForward(hFwdOnTankDeath);
     Call_PushCell(iOldTankClient);
     Call_Finish();
@@ -93,39 +114,5 @@ L4D2Util_Tanks_CreateForwards() {
     hFwdOnTankSpawn = CreateGlobalForward("OnTankSpawn", ET_Ignore, Param_Cell);
     hFwdOnTankPass = CreateGlobalForward("OnTankPass", ET_Ignore, Param_Cell, Param_Cell);
     hFwdOnTankDeath = CreateGlobalForward("OnTankDeath", ET_Ignore, Param_Cell);
-}
-
-L4D2Util_Tanks_CreateNatives() {
-    CreateNative("IsTankInPlay", _native_L4D2Util_IsTankInPlay);
-    CreateNative("GetTankClient", _native_L4D2Util_GetTankClient);
-}
-
-public _native_L4D2Util_IsTankInPlay(Handle:hPlugin, iNumParams) {
-    return _:bTankInPlay;
-}
-
-FindTankClient() {
-    for (new i = 1; i < MaxClients+1; i++) {
-        if (IsTank(i)) {
-            return i;
-        }
-    }
-    
-    return -1;
-}
-
-GetTankClient() {
-    if (iTankClient == -1)
-        return -1;
-    
-    if (!IsTank(iTankClient)) {
-        iTankClient = FindTankClient();
-    }
-    
-    return iTankClient;
-}
-
-public _native_L4D2Util_GetTankClient(Handle:hPlugin, iNumParams) {
-    return GetTankClient();
 }
 

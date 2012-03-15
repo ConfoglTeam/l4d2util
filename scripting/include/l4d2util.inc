@@ -55,21 +55,6 @@ forward OnTankPass(iTank, iOldTank);
  */
 forward OnTankDeath(iOldTank);
 
-/**
- * Is there a tank currently in play?
- *
- * @return bool
- */
-native bool:IsTankInPlay();
-
-/**
- * Retuns the client ID of the player currently playing tank.
- *
- * @return client ID
- */
-native GetTankClient();
-
-
 public SharedPlugin:__pl_l4d2util = {
     name = "l4d2util",
     file = "l4d2util.smx",
@@ -81,8 +66,6 @@ public SharedPlugin:__pl_l4d2util = {
 };
 
 public __pl_l4d2util_SetNTVOptional() {
-    MarkNativeAsOptional("GetTankClient");
-    MarkNativeAsOptional("IsTankInPlay");
     L4D2Util_Weapons_SetNTVOptional();
 }
 

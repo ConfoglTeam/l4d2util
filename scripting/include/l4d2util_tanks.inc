@@ -45,28 +45,22 @@ stock bool:IsTankHittable(iEntity) {
  * Tanks frustation level in the range 0-100, where 100 is when the rage meter
  * is full.
  *
+ * @param iTankClient tank's client ID
  * @return frustration level
  */
-stock GetTankFrustration() {
-    new iTankClient = GetTankClient();
-    
-    if (iTankClient == -1) {
-        return -1;
-    }
-    
+stock GetTankFrustration(iTankClient) {
     return (100 - GetEntProp(iTankClient, Prop_Send, "m_frustration"));
 }
 
 /**
  * Sets the tank's frustration level.
  *
+ * @param iTankClient tank's client ID
  * @param iFrustration frustration level (0-100)
  * @noreturn
  */
-stock SetTankFrustration(iFrustration) {
-    new iTankClient = GetTankClient();
-    
-    if (iTankClient == -1 || iFrustration < 0 || iFrustation > 100) {
+stock SetTankFrustration(iTankClient, iFrustration) {
+    if (iFrustration < 0 || iFrustation > 100) {
         return;
     }
     
@@ -75,16 +69,53 @@ stock SetTankFrustration(iFrustration) {
 
 /**
  * Returns true if the tank is on fire.
+ * @remarks This should work for any client ID, even if they are not the tank 
  *
+ * @param iTankClient tank's client ID
  * @param bool
  */
-stock bool:IsTankOnFire() {
-    new iTankClient = GetTankClient();
-    
-    if (iTankClient == -1) {
-        return false;
+stock bool:IsTankOnFire(iTankClient) {
+    return bool:(GetEntityFlags(iTankClient) & FL_ONFIRE);
+}
+
+/**
+ * Searches for a player who is in control of a tank.
+ *
+ * @param iTankClient client index to begin searching from
+ * @return client ID or -1 if not found
+ */
+stock FindTankClient(iTankClient) {
+    for (new i = iTankClient < 0 ? 1 : iTankClient+1; i < MaxClients+1; i++) {
+        if (IsTank(i)) {
+            return i;
+        }
     }
     
-    return bool:(GetEntityFlags(iTankClient) & FL_ONFIRE);
+    return -1;
+}
+
+/**
+ * Is there a tank currently in play?
+ *
+ * @return bool
+ */
+stock bool:IsTankInPlay() {
+    return bool:(FindTankClient(-1) != -1);
+}
+
+/**
+ * Counts the number of tanks currently in play.
+ *
+ * @return number of tanks in play
+ */
+stock NumTanksInPlay() {
+    new count = 0;
+    new client = -1;
+    
+    while ((client = FindTankClient(client)) != -1) {
+        ++count;
+    }
+    
+    return count;
 }
 

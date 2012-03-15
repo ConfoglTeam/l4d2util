@@ -19,6 +19,8 @@ public Plugin:myinfo = {
 
 public OnPluginStart() {
     L4D2Util_Weapons_Init();
+    L4D2Util_Tanks_Init();
+    
     HookEvent("round_start", L4D2Util_RoundStart);
     HookEvent("round_end", L4D2Util_RoundEnd);
     HookEvent("tank_spawn", L4D2Util_TankSpawn);
@@ -30,7 +32,6 @@ public OnMapEnd() {
 }
 
 public APLRes:AskPluginLoad2(Handle:hPlugin, bool:bLateLoad, String:sError[], iErrMax) {
-    L4D2Util_Tanks_CreateNatives();
     L4D2Util_Weapons_CreateNatives();
     
     L4D2Util_Rounds_CreateForwards();

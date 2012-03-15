@@ -66,9 +66,10 @@ public Action:FindTankTimer(Handle:hTimer) {
     SMISNT(iTheTank, 0, "found the tank");
     SMOK(IsTankInPlay(), "the tank is in play");
     SMIS(GetInfectedClass(iTheTank), L4D2Infected_Tank, "tank's infected class");
-    SMIS(iTheTank, GetTankClient(), "the tank's client matches GetTankClient()");
-    SMIS(GetTankFrustration(), 100, "newly spawned tank's frustration is 100");
-    SMOK(!IsTankOnFire(), "tank is not on fire");
+    SMIS(iTheTank, FindTankClient(-1), "the tank's client matches GetTankClient()");
+    SMIS(GetTankFrustration(iTheTank), 100, "newly spawned tank's frustration is 100");
+    SMOK(!IsTankOnFire(iTheTank), "tank is not on fire");
+    SMIS(NumTanksInPlay(), 1, "there is only one tank in play");
     
     decl String:sBuffer[32];
     GetInfectedClassName(GetInfectedClass(iTheTank), sBuffer, sizeof(sBuffer));
