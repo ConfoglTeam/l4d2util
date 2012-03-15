@@ -35,6 +35,7 @@ L4D2Util_Tanks_Init() {
 }
 
 L4D2Util_Tanks_OnRoundStart() {
+    ClearArray(hTankClients);
     CreateTimer(0.1, L4D2Util_Tanks_HookCars);
 }
 
