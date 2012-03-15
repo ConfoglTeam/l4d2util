@@ -69,13 +69,6 @@ native bool:IsTankInPlay();
  */
 native GetTankClient();
 
-#endif // __IN_L4D2UTIL__
-
-#include <l4d2util_constants>
-#include <l4d2util_infected>
-#include <l4d2util_rounds>
-#include <l4d2util_survivors>
-#include <l4d2util_tanks>
 
 public SharedPlugin:__pl_l4d2util = {
     name = "l4d2util",
@@ -90,5 +83,14 @@ public SharedPlugin:__pl_l4d2util = {
 public __pl_l4d2util_SetNTVOptional() {
     MarkNativeAsOptional("GetTankClient");
     MarkNativeAsOptional("IsTankInPlay");
+    L4D2Util_Weapons_SetNTVOptional();
 }
 
+#endif // __IN_L4D2UTIL__
+
+#include <l4d2util_constants>
+#include <l4d2util_infected>
+#include <l4d2util_rounds>
+#include <l4d2util_survivors>
+#include <l4d2util_tanks>
+#include <l4d2util_weapons>
