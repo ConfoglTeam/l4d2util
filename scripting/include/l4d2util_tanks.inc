@@ -4,7 +4,7 @@
 #define l4d2_tanks_inc_
 
 #if !defined L4D2UTIL_STOCKS_ONLY
-  #if !defined __IN_L4D2UTIL__
+#if !defined __IN_L4D2UTIL__
 
 /**
  * Called when a tank punches a hittable, like a car or dumpster.
@@ -40,7 +40,7 @@ forward OnTankPass(iTank, iOldTank);
  */
 forward OnTankDeath(iOldTank);
 
-  #endif // __IN_L4D2UTIL__
+#endif // __IN_L4D2UTIL__
 #endif // L4D2UTIL_STOCKS_ONLY
 
 

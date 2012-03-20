@@ -6,7 +6,7 @@
 #include <sdktools>
 
 #if !defined L4D2UTIL_STOCKS_ONLY
-  #if !defined __IN_L4D2_UTIL__
+#if !defined __IN_L4D2_UTIL__
 
 /**
  * Called when a new round begins.
@@ -22,7 +22,7 @@ forward OnRoundStart();
  */
 forward OnRoundEnd();
 
-  #endif // __IN_L4D2UTIL__
+#endif // __IN_L4D2UTIL__
 #endif // L4D2UTIL_STOCKS_ONLY
 
 

@@ -13,7 +13,7 @@
 #include <l4d2util_weapons>
 
 #if !defined L4D2UTIL_STOCKS_ONLY
-  #if !defined __IN_L4D2UTIL__
+#if !defined __IN_L4D2UTIL__
 
 public SharedPlugin:__pl_l4d2util = {
     name = "l4d2util",
@@ -29,5 +29,6 @@ public __pl_l4d2util_SetNTVOptional() {
     L4D2Util_Weapons_SetNTVOptional();
 }
 
-  #endif // __IN_L4D2UTIL__
+#endif // __IN_L4D2UTIL__
 #endif // L4D2UTIL_STOCKS_ONLY
+
