@@ -54,14 +54,14 @@ enum WeaponId
     WEPID_SPITTER_CLAW,     // 43
     WEPID_JOCKEY_CLAW,      // 44
     WEPID_MACHINEGUN,       // 45
-    WEPID_FATAL_VOMIT,      // 46
-    WEPID_EXPLODING_SPLAT,  // 47
-    WEPID_LUNGE_POUNCE,     // 48
+    WEPID_VOMIT,            // 46
+    WEPID_SPLAT,            // 47
+    WEPID_POUNCE,           // 48
     WEPID_LOUNGE,           // 49
-    WEPID_FULLPULL,         // 50
+    WEPID_PULL,             // 50
     WEPID_CHOKE,            // 51
-    WEPID_THROWING_ROCK,    // 52
-    WEPID_TURBO_PHYSICS,    // 53 what is this
+    WEPID_ROCK,             // 52
+    WEPID_PHYSICS,          // 53
     WEPID_AMMO,             // 54
     WEPID_UPGRADE_ITEM      // 55
 };
