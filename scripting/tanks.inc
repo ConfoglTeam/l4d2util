@@ -36,10 +36,10 @@ L4D2Util_Tanks_Init() {
 
 L4D2Util_Tanks_OnRoundStart() {
     ClearArray(hTankClients);
-    CreateTimer(0.1, L4D2Util_Tanks_HookCars);
+    CreateTimer(0.1, L4D2Util_Tanks_HookProps);
 }
 
-public Action:L4D2Util_Tanks_HookCars(Handle:hTimer) {
+public Action:L4D2Util_Tanks_HookProps(Handle:hTimer) {
      new iEntity = -1;
      
      while ((iEntity = FindEntityByClassname(iEntity, "prop_physics")) != -1) {
