@@ -76,6 +76,10 @@ L4D2Util_Tanks_TankSpawn(client) {
 }
 
 L4D2Util_Tanks_PlayerDeath(client) {
+    if (client == 0) {
+        return;
+    }
+    
     if (!IsTank(client)) {
         return;
     }
