@@ -26,7 +26,7 @@ public SharedPlugin:__pl_l4d2util = {
 };
 
 public __pl_l4d2util_SetNTVOptional() {
-    L4D2Util_Weapons_SetNTVOptional();
+    // Stub
 }
 
 #endif // __IN_L4D2UTIL__
