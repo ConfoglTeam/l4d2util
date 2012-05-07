@@ -101,7 +101,7 @@ stock GetTankFrustration(iTankClient) {
  * @noreturn
  */
 stock SetTankFrustration(iTankClient, iFrustration) {
-    if (iFrustration < 0 || iFrustation > 100) {
+    if (iFrustration < 0 || iFrustration > 100) {
         return;
     }
     
