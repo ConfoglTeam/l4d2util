@@ -35,27 +35,35 @@ public OnStartTests() {
     RunCheatCommand(iSurvivor, "give", "health");
     SMISNT(GetSurvivorTemporaryHealth(iSurvivor), 0, "the survivor has temp health");
     
-    RunCheatCommand(iSurvivor, "z_spawn", "hunter");
-    CreateTimer(0.1, FindHunterTimer);
+    RunCheatCommand(iSurvivor, "z_spawn", "jockey");
+    CreateTimer(0.1, FindJockeyTimer);
 }
 
-public Action:FindHunterTimer(Handle:hTimer) {
-    new iHunter;
+public Action:FindJockeyTimer(Handle:hTimer) {
+    new iJockey;
     
     for (new i = 1; i < MaxClients+1; i++) {
         if (IsInfected(i)) {
-            iHunter = i;
+            iJockey = i;
             break;
         }
     }
     
-    SMOK(iHunter != 0, "found an infected");
-    SMIS(GetInfectedClass(iHunter), L4D2Infected_Hunter, "the infected is an hunter");
-    SMIS(IsInfectedGhost(iHunter), false, "the hunter isn't in ghost mode");
+    SMOK(iJockey != 0, "found an infected");
+    SMIS(GetInfectedClass(iJockey), L4D2Infected_Jockey, "the infected is a hunter");
+    SMIS(IsInfectedGhost(iJockey), false, "the hunter isn't in ghost mode");
     
     decl String:sBuffer[32];
-    GetInfectedClassName(GetInfectedClass(iHunter), sBuffer, sizeof(sBuffer));
-    SMOK(!strcmp(sBuffer, "Hunter"), "the hunter's class name is Hunter");
+    GetInfectedClassName(GetInfectedClass(iJockey), sBuffer, sizeof(sBuffer));
+    SMOK(!strcmp(sBuffer, "Jockey"), "the hunter's class name is Jockey");
+    
+    new Float:timestamp;
+    new Float:duration;
+    SMOK(GetInfectedAbilityTimer(iJockey, timestamp, duration), "got jockey ability timer");
+    SMIS(duration, 0.0, "jockey ability duration 0.0");
+    SMOK(SetInfectedAbilityTimer(iJockey, GetGameTime()+0.5, 0.5), "set ability timer");
+    SMOK(GetInfectedAbilityTimer(iJockey, timestamp, duration), "got jockey ability timer again");
+    SMIS(duration, 0.5, "duration is 0.5");
 }
 
 IncapPlayer(client) {
