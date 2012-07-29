@@ -13,7 +13,7 @@ public Plugin:myinfo = {
     author = "Confogl Team",
     description = "Useful functions and forwards for Left 4 Dead 2 SourceMod plugins",
     version = "1.0",
-    url = "https://github.com/Jahze/l4d2util"
+    url = "https://github.com/ConfoglTeam/l4d2util"
 }
 
 public OnPluginStart() {
