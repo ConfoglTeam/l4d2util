@@ -253,3 +253,41 @@ new const WeaponSlots[_:WeaponId] =
     -1  // WEPID_UPGRADE_ITEM
 };
 
+// Indexes are arbitrary at this point.
+enum SurvivorCharacter {
+    SC_NONE=-1,
+    SC_COACH=0,
+    SC_NICK,
+    SC_ROCHELLE,
+    SC_ELLIS,
+    SC_LOUIS,
+    SC_ZOEY,
+    SC_BILL,
+    SC_FRANCIS
+};
+
+// Names of the survivors
+// TODO: languages?
+new const String:SurvivorNames[SurvivorCharacter][] = {
+    "Coach",
+    "Nick",
+    "Rochelle",
+    "Ellis",
+    "Louis",
+    "Zoey",
+    "Bill",
+    "Francis"
+};
+
+// Models for each of the characters
+new const String:SurvivorModels[SurvivorCharacter][] = {
+    "models/survivors/survivor_coach.mdl",
+    "models/survivors/survivor_gambler.mdl",
+    "models/survivors/survivor_producer.mdl",
+    "models/survivors/survivor_mechanic.mdl",
+    "models/survivors/survivor_manager.mdl",
+    "models/survivors/survivor_teenangst.mdl",
+    "models/survivors/survivor_namvet.mdl",
+    "models/survivors/survivor_biker.mdl"
+};
+

@@ -3,6 +3,8 @@
 #endif
 #define l4d2util_survivors_inc_
 
+static Handle:hSurvivorModelsTrie = INVALID_HANDLE;
+
 /**
  * Returns true if the player is currently on the survivor team. 
  *
@@ -57,7 +59,7 @@ stock GetSurvivorTemporaryHealth(client) {
  * @return incap count
  */
 stock GetSurvivorIncapCount(client) {
-	return GetEntProp(client, Prop_Send, "m_currentReviveCount");
+    return GetEntProp(client, Prop_Send, "m_currentReviveCount");
 }
 
 /**
@@ -68,5 +70,76 @@ stock GetSurvivorIncapCount(client) {
  */
 stock bool:IsHangingFromLedge(client) {
     return bool:(GetEntProp(client, Prop_Send, "m_isHangingFromLedge") || GetEntProp(client, Prop_Send, "m_isFallingFromLedge"));
+}
+
+/**
+ * Initializes internal structure necessary for IdentifySurvivor() function
+ * @remark It is recommended that you run this function on plugin start, but not necessary
+ *
+ * @noreturn
+ */
+stock InitSurvivorModelTrie()
+{
+    hSurvivorModelsTrie = CreateTrie();
+    for(new i = 0; i < _:SurvivorCharacter; i++)
+    {
+        SetTrieValue(hSurvivorModelsTrie, SurvivorModels[SurvivorCharacter:i], i);
+    }
+}
+
+/**
+ * Identifies a client's survivor character based on their current model.
+ * @remark SC_NONE on errors
+ *
+ * @param client                Survivor client to identify
+ * @return SurvivorCharacter    index identifying the survivor, or SC_NONE if not identified.
+ */
+stock SurvivorCharacter:IdentifySurvivor(client)
+{
+    if (!client || !IsClientInGame(client) || !IsSurvivor(client))
+    {
+        return SC_NONE;
+    }
+    decl String:clientModel[42];
+    GetClientModel(client, clientModel, sizeof(clientModel));
+    return ClientModelToSC(clientModel);
+}
+
+/**
+ * Identifies the survivor character corresponding to a player model.
+ * @remark SC_NONE on errors, uses SurvivorModelTrie
+ *
+ * @param model                 Player model to identify
+ * @return SurvivorCharacter    index identifying the model, or SC_NONE if not identified.
+ */
+stock SurvivorCharacter:ClientModelToSC(const String:model[])
+{
+    if(hSurvivorModelsTrie == INVALID_HANDLE)
+    {
+        InitSurvivorModelTrie();
+    }
+    new SurvivorCharacter:sc;
+    if(GetTrieValue(hSurvivorModelsTrie, model, sc))
+    {
+        return sc;
+    }
+    return SC_NONE;
+}
+
+/**
+ * Get the name of a survivor character.
+ *
+ * @param character     SurvivorCharacter to get the name of
+ * @param buffer        buffer to store name
+ * @param length        length of buffer
+ * @return bool         false if SC_NONE, otherwise true
+ */
+stock bool:GetSurvivorName(SurvivorCharacter:character, String:buffer[], length)
+{
+    if (character == SC_NONE)
+        return false;
+
+    strcopy(buffer, length, SurvivorNames[_:character]);
+    return true;
 }
 
