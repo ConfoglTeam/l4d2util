@@ -159,3 +159,14 @@ stock GetInfectedVictim(client) {
     
     return GetEntPropEnt(client, Prop_Send, L4D2_InfectedVictimNetprops[_:zClass-1]);
 }
+
+/**
+ * Gets an entity's gender
+ *
+ * @param entity
+ * @return L4D_Gender
+ */
+stock L4D2_Gender:GetGender(entity) {
+    return L4D2_Gender:GetEntProp(entity, Prop_Send, "m_Gender");
+}
+

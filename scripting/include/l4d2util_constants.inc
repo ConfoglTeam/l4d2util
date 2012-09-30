@@ -31,6 +31,28 @@ new const String:L4D2_InfectedNames[8][] = {
     "Tank"
 };
 
+enum L4D2_Gender {
+    L4D2Gender_Neutral,
+    L4D2Gender_Male,
+    L4D2Gender_Female,
+    L4D2Gender_Bill,
+    L4D2Gender_Zoey,
+    L4D2Gender_Francis,
+    L4D2Gender_Louis,
+    L4D2Gender_Nick,
+    L4D2Gender_Rochelle,
+    L4D2Gender_Coach,
+    L4D2Gender_Ellis,
+    L4D2Gender_CEDA,
+    L4D2Gender_Mudman,
+    L4D2Gender_Workman,
+    L4D2Gender_Fallen,
+    L4D2Gender_RiotCop,
+    L4D2Gender_Clown,
+    L4D2Gender_JimmyGibbs,
+    L4D2Gender_HospitalPatient
+};
+
 // Weapon ID enumerations.
 // These values are *NOT* arbitrary! 
 // They are used in game as the weaponid for weapon_spawn entities
