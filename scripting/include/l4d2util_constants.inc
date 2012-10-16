@@ -116,6 +116,25 @@ enum WeaponId
     WEPID_UPGRADE_ITEM      // 55
 };
 
+// These values are arbitrary
+enum MeleeWeaponId {
+    WEPID_MELEE_NONE,
+    WEPID_KNIFE,
+    WEPID_BASEBALL_BAT,
+    WEPID_CHAINSAW,
+    WEPID_CRICKET_BAT,
+    WEPID_CROWBAR,
+    WEPID_DIDGERIDOO,
+    WEPID_ELECTRIC_GUITAR,
+    WEPID_FIREAXE,
+    WEPID_FRYING_PAN,
+    WEPID_GOLF_CLUB,
+    WEPID_KATANA,
+    WEPID_MACHETE,
+    WEPID_RIOT_SHIELD,
+    WEPID_TONFA
+};
+
 // Weapon names for each of the weapons, used in identification.
 new const String:WeaponNames[WeaponId][] =
 {
@@ -138,6 +157,26 @@ new const String:WeaponNames[WeaponId][] =
     "pounce", "lounge", "pull",                                                              // 48
     "choke", "rock", "physics",                                                              // 51
     "ammo", "upgrade_item"                                                                   // 54
+};
+
+// Internal names for melee weapons
+new const String:MeleeWeaponNames[MeleeWeaponId][] =
+{
+    "",
+    "knife",
+    "baseball_bat",
+    "chainsaw",
+    "cricket_bat",
+    "crowbar",
+    "didgeridoo",
+    "electric_guitar",
+    "fireaxe",
+    "frying_pan",
+    "golfclub",
+    "katana",
+    "machete",
+    "riotshield",
+    "tonfa"
 };
 
 // World weapon models for each of the weapons. Useful for making new weapon spawns.
@@ -163,20 +202,7 @@ new const String:WeaponModels[WeaponId][] =
     "/props_junk/gascan001a.mdl",
     "/props_junk/propanecanister001.mdl",
     "/props_equipment/oxygentank01.mdl",
-    "",                                               // "/weapons/w_knife_t.mdl",
-                                                      // "/weapons/melee/w_bat.mdl",
-                                                      // "/weapons/melee/w_chainsaw.mdl
-                                                      // "/weapons/melee/w_cricket_bat.mdl",
-                                                      // "/weapons/melee/w_crowbar.mdl",
-                                                      // "/weapons/melee/w_didgeridoo.mdl",
-                                                      // "/weapons/melee/w_electric_guitar.mdl",
-                                                      // "/weapons/melee/w_fireaxe.mdl",
-                                                      // "/weapons/melee/w_frying_pan.mdl",
-                                                      // "/weapons/melee/w_golfclub.mdl",
-                                                      // "/weapons/melee/w_katana.mdl",
-                                                      // "/weapons/melee/w_machete.mdl",
-                                                      // "/weapons/melee/w_riotshield.mdl",
-                                                      // "/weapons/melee/w_tonfa.mdl"
+    "",
     "/weapons/melee/w_chainsaw.mdl",
     "/w_models/weapons/w_grenade_launcher.mdl",
     "",
@@ -213,6 +239,25 @@ new const String:WeaponModels[WeaponId][] =
     "",
     "",
     ""
+};
+
+new const String:MeleeWeaponModels[MeleeWeaponId][] =
+{
+    "",
+    "/w_models/weapons/w_knife_t.mdl",
+    "/weapons/melee/w_bat.mdl",
+    "/weapons/melee/w_chainsaw.mdl",
+    "/weapons/melee/w_cricket_bat.mdl",
+    "/weapons/melee/w_crowbar.mdl",
+    "/weapons/melee/w_didgeridoo.mdl",
+    "/weapons/melee/w_electric_guitar.mdl",
+    "/weapons/melee/w_fireaxe.mdl",
+    "/weapons/melee/w_frying_pan.mdl",
+    "/weapons/melee/w_golfclub.mdl",
+    "/weapons/melee/w_katana.mdl",
+    "/weapons/melee/w_machete.mdl",
+    "/weapons/melee/w_riotshield.mdl",
+    "/weapons/melee/w_tonfa.mdl"
 };
 
 new const WeaponSlots[_:WeaponId] =
