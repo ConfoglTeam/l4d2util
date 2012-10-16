@@ -7,18 +7,7 @@
 #include <sdktools>
 #include <smtest>
 
-enum Type1 { Tx, Ty };
-enum Type2 { Ta, Tb };
-Poly({Type1, Type2}:value, tagType = tagof(value)) {
-    if (tagType == tagof(Type1))
-        return 1;
-    if (tagType == tagof(Type2))
-        return 2;
-    return 3;
-}
-
 public OnStartTests() {
-    SMIS(1, Poly(0), "yeah");
     SMOK(IsValidWeaponId(WEPID_RIFLE), "WEPID_RIFLE is valid");
     SMOK(!IsValidWeaponId(WeaponId:200), "WeaponId:200 is invalid");
     SMOK(IsValidWeaponId(WEPID_KATANA),"WEPID_KATANA is valid");

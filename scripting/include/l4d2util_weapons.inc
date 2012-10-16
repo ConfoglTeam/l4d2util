@@ -164,7 +164,7 @@ stock WeaponId:IdentifyWeapon(entity)
 }
 
 // Helper function used for getting an entity's internal melee name
-static bool:GetMeleeWeaponNameFromEntity(entity, String:buffer[], length) {
+stock bool:GetMeleeWeaponNameFromEntity(entity, String:buffer[], length) {
     decl String:classname[64];
     if (! GetEdictClassname(entity, classname, sizeof(classname)))
     {
