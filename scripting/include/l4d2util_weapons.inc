@@ -10,6 +10,7 @@
 
 static Handle:hWeaponNamesTrie = INVALID_HANDLE;
 static Handle:hMeleeWeaponNamesTrie = INVALID_HANDLE;
+static Handle:hMeleeWeaponModelsTrie = INVALID_HANDLE;
 stock InitWeaponNamesTrie()
 {
     hWeaponNamesTrie = CreateTrie();
@@ -19,9 +20,11 @@ stock InitWeaponNamesTrie()
     }
 
     hMeleeWeaponNamesTrie = CreateTrie();
+    hMeleeWeaponModelsTrie = CreateTrie();
     for (new i = 0; i < _:MeleeWeaponId; ++i)
     {
         SetTrieValue(hMeleeWeaponNamesTrie, MeleeWeaponNames[MeleeWeaponId:i], i);
+        SetTrieString(hMeleeWeaponModelsTrie, MeleeWeaponModels[MeleeWeaponId:i], MeleeWeaponNames[MeleeWeaponId:i]);
     }
 }
 
@@ -173,8 +176,25 @@ stock bool:GetMeleeWeaponNameFromEntity(entity, String:buffer[], length) {
 
     if (StrEqual(classname, "weapon_melee_spawn"))
     {
-        GetEntPropString(entity, Prop_Data, "m_iszMeleeWeapon", buffer, length);
-        return true;
+        if (hMeleeWeaponModelsTrie == INVALID_HANDLE)
+        {
+            InitWeaponNamesTrie();
+        }
+
+        decl String:sModelName[128];
+        GetEntPropString(entity, Prop_Data, "m_ModelName", sModelName, sizeof(sModelName));
+
+        // Strip models directory
+        if (strncmp(sModelName, "models/", 7, false) == 0)
+        {
+            strcopy(sModelName, sizeof(sModelName), sModelName[6]);
+        }
+
+        if (GetTrieString(hMeleeWeaponModelsTrie, sModelName, buffer, length))
+        {
+            return true;
+        }
+        return false;
     }
     else if (StrEqual(classname, "weapon_melee"))
     {
